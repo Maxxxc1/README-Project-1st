@@ -19,6 +19,7 @@ There is no need for installation on this README file
 
 ## Usage
 Simply open javascript, create questions and functions to create README file, and use node
+[](https://youtu.be/KCbUTO1Yhuk)
 
 ## License
 'MIT'
