@@ -4,64 +4,73 @@ const inquirer = require('inquirer');
 
 // TODO: Create an array of questions for user input
 const questions  = () => {
-    return inquirer
-    .prompt([
+    return inquirer.prompt([
     {
         type: 'input',
         message: 'What is the title?',
-        name: 'Title',
+        name: 'title',
     },
     {    
         type: 'input',
         message: 'What is a Brief description of project:',
-        name: 'Description',
+        name: 'description',
     },   
     {
         type: 'input',
         message: 'Provide a table of contents with links to corresponding content:',
-        name: 'Table of Contents',
+        name: 'tableOfContents',
     },
     {
         type: 'input',
         message: 'Step by Step installation instructions:',
-        name: 'Installation',
+        name: 'installation',
     },
     {
         type: 'input',
         message: 'Provide directions and examples for use:',
-        name: 'Usage',
+        name: 'usage',
     },
     {
         type: 'input',
         message: 'Please select a license:',
-        name: 'License',
+        name: 'license',
     },
     {
         type: 'input',
         message: 'List of contributing partners or help:',
-        name: 'Contributing',
+        name: 'contributing',
     },
     {
         type: 'input',
         message: 'Write any tests for project:',
-        name: 'Tests',
+        name: 'tests',
     },
     {
         type: 'input',
         message: 'Questions and how to reach me:',
-        name: 'Questions',
+        name: 'questions',
 
     },
-    ])
-}
+    {
+        type: 'input',
+        message: 'What is your GitHub username?',
+        name: 'username',
+    },
+    {
+        type: 'input',
+        message: 'What is your email address?',
+        name: 'email',
+    }
+    ]);
+};
 
 
 // Function for BADGE???//
 const badgeLicense = (response) => {
-const badge = "";
+let badge = '';
 
-if (response.license == "MIT License") {
-   badge = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)"
+if (response.license === 'MIT License') {
+   badge = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)'
 }
 return badge;
 };
@@ -69,17 +78,15 @@ return badge;
 
 // TODO: Create a function to write README file
 const createReadme = (response) => `
-
-# Title
-${response.title}
+# ${response.title}
 ${badgeLicense(response)}
 
 ## Description
 ${response.description}
 
 ## Table of Contents
-- [Descripton](#description)
-- [Table of Contents](#tableofcontents)
+- [Description](#description)
+- [Table of Contents](#tableOfContents)
 - [Installation](#installation)
 - [Usage](#usage)
 - [License](#license)
@@ -88,32 +95,32 @@ ${response.description}
 - [Quesions](#questions)
 
 ## Installation
-${response.install}
+${response.installation}
 
 ## Usage
 ${response.usage}
 
 ## License
-${response.License}
+${response.license}
 
 ## Contributing
-${response.credits}
+${response.contributing}
 
 
 ## Tests
-${response.test}
+${response.tests}
 
 ## Questions
 Reach out with any questions you may have.
-Github: (${response.username})
-Email: (${response.email})
+Github: ${response.username}
+Email: ${response.email}
 `;
 
 
 // TODO: Create a function to initialize app
 function init() {
-    questions()
-    .then((response) => fs.writeFile('Readme.md', createReadme(response), (err) =>
+    questions().then((response) => 
+    fs.writeFile('Readme.md', createReadme(response), (err) =>
     err ? console.error(err) : console.log('Readme file was succsesfully created.')));
 }
 
